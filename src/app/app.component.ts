@@ -1,18 +1,11 @@
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
-
+import { Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { login } from './state/login.actions';
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    ButtonModule,
-    InputTextModule,
-    ReactiveFormsModule
-  ],
+  standalone: false,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -20,17 +13,15 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 export class AppComponent {
   title = 'login-page';
   loginForm = new FormGroup({
-    userName:new FormControl(''),
-    password:new FormControl(''),
+    userName: new FormControl(''),
+    password: new FormControl(''),
   });
-  
-  constructor(private readonly router: Router){}
-  onSubmit(){
-    if(this.loginForm.controls.userName.value==='aaaa'){
-      this.router.navigate(['success'])
-    } else{
-      this.router.navigate(['fail'])
-    }
+
+  constructor(private readonly router: Router, private store: Store<{}>) {
   }
-  
+
+  onSubmit() {
+    this.store.dispatch(login({ username: this.loginForm.controls.userName.value, password: this.loginForm.controls.password.value }));
+  }
+
 }
