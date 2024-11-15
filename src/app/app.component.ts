@@ -1,13 +1,27 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Router, RouterOutlet } from '@angular/router';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { login } from './state/login.actions';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { AppState } from './state/login.seletor';
+import { Observable } from 'rxjs';
+import { loginModel } from './state/login.model';
 @Component({
   selector: 'app-root',
-  standalone: false,
+  standalone: true,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  imports : [
+    CommonModule,
+    RouterOutlet,
+    ButtonModule,
+    InputTextModule,
+    ReactiveFormsModule
+  ]
 })
 
 export class AppComponent {
@@ -16,8 +30,9 @@ export class AppComponent {
     userName: new FormControl(''),
     password: new FormControl(''),
   });
-
-  constructor(private readonly router: Router, private store: Store<{}>) {
+  login$: Observable<loginModel>;
+  constructor(private readonly router: Router, private store: Store<AppState>) {
+    this.login$=this.store.select((state)=>state.login)
   }
 
   onSubmit() {
