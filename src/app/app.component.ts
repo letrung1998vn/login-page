@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { login } from './state/login.actions';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { AppState } from './state/login.seletor';
+import { provideHttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -28,6 +29,7 @@ export class AppComponent {
     password: new FormControl(''),
   });
   constructor(private store: Store<AppState>) {
+    this.loginForm.setValidators(Validators.nullValidator)
   }
 
   onSubmit() {
