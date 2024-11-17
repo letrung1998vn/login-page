@@ -3,8 +3,8 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { LoginService } from "./login.service";
 import { catchError, map, switchMap, tap, throwError } from "rxjs";
 import { Router } from "@angular/router";
-import { HttpErrorResponse, HttpResponseBase } from "@angular/common/http";
-import { login, loginFail, loginSuccess } from "./login.actions";
+import { HttpErrorResponse } from "@angular/common/http";
+import { login, loginSuccess } from "./login.actions";
 
 @Injectable()
 export class LoginEffects {

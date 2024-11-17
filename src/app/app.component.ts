@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { login } from './state/login.actions';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { AppState } from './state/login.seletor';
-import { provideHttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -33,7 +32,6 @@ export class AppComponent {
   }
 
   onSubmit() {
-    // this.router.navigate(['/success'],{ queryParams: { message: 'Welcome' }})
     this.store.dispatch(login({ userName: this.loginForm.controls.userName.value, password: this.loginForm.controls.password.value }));
   }
 
