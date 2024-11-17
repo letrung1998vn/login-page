@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login-fail',
@@ -8,5 +9,12 @@ import { Component } from '@angular/core';
   styleUrl: './login-fail.component.css'
 })
 export class LoginFailComponent {
-  message ='';
+  message: String|null ='';
+  
+  constructor(private route: ActivatedRoute){
+    this.route.queryParams.subscribe(params => {
+      this.message = params['message'];
+    });
+  };
+  
 }

@@ -9,15 +9,15 @@ import { Router } from "@angular/router";
 export class LoginEffects {
     constructor(private actions$: Actions, private loginService: LoginService, private router: Router) {   
     }  
-     login$=createEffect(() => this.actions$.pipe(
-        ofType(login), tap((action)=>this.router.navigate(['/success'])),
-        mergeMap((actions:any) => this.loginService.login(actions.userName, actions.password)
-        .pipe(
-            map((login) => loginSuccess({body:login})),
-            catchError(()=>EMPTY)
-        ))
-    )
-);
+    // login$=createEffect(() => this.actions$.pipe(
+    //     ofType(login), tap((action)=>this.router.navigate(['/success'])),
+    //     mergeMap((actions:any) => this.loginService.login(actions.userName, actions.password)
+    //     .pipe(
+    //         map((login) => loginSuccess({body:login})),
+    //         catchError(()=>EMPTY)
+    //     ))
+    //     )
+    // );
 
 }
 

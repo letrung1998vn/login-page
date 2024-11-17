@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login-success',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './login-success.component.css'
 })
 export class LoginSuccessComponent {
-  message='';
+  message: String|null ='';
+  
+  constructor(private route: ActivatedRoute){
+    this.route.queryParams.subscribe(params => {
+      this.message = params['message'];
+    });
+  };
 }
