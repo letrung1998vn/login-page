@@ -1,6 +1,10 @@
-import { HttpStatusCode } from "@angular/common/http";
+import { HttpResponseBase, HttpStatusCode } from "@angular/common/http";
 
-export interface loginModel{
-    message:String|null;
-    statusCode: HttpStatusCode|null;
+export interface loginSuccessModel{
+    message: String,
+    statusCode: number
+}
+export interface loginFailModel{
+    message: String,
+    statusCode: number
 }

@@ -1,7 +1,6 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpResponseBase } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { loginModel } from "./login.model";
 
 @Injectable({
     providedIn: 'root',
@@ -11,11 +10,11 @@ import { loginModel } from "./login.model";
     constructor (private http: HttpClient) {
     }
     
-    login(userName: String|null, password: String|null) : Observable<loginModel> {
+    login(userName: String|null, password: String|null) : Observable<HttpResponseBase> {
       const CustomHeaders = new HttpHeaders()
       .set('Access-Control-Allow-Origin', '*')
       .set('Content-Type', 'application/json; charset=utf-8')
       .set('Access-Control-Request-Method', 'POST');
-      return this.http.post<loginModel>('http://localhost:8080/auth/login', JSON.stringify({userName, password}),{headers:CustomHeaders});
+      return this.http.post<HttpResponseBase>('http://localhost:8080/auth/login', JSON.stringify({userName:userName, password:password}),{headers:CustomHeaders});
     }
   }
