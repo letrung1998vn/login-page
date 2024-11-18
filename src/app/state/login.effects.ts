@@ -4,7 +4,7 @@ import { LoginService } from "./login.service";
 import { catchError, map, switchMap, tap, throwError } from "rxjs";
 import { Router } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
-import { login, loginSuccess } from "./login.actions";
+import { login, loginFail, loginSuccess } from "./login.actions";
 
 @Injectable()
 export class LoginEffects {
@@ -15,7 +15,7 @@ export class LoginEffects {
             .pipe(
                 map((login: any) => loginSuccess({body: login})),
                 tap((loginSuccess)=>this.router.navigate(['/success'],{ queryParams: { message: loginSuccess.body }})),
-                catchError((error: HttpErrorResponse)=>{return throwError(()=> this.router.navigate(['/fail'],{ queryParams: { message: error.error }}))})
+                catchError((error: HttpErrorResponse)=>{loginFail({body:error}); return throwError(()=> this.router.navigate(['/fail'],{ queryParams: { message: error.error }}))})
             ))
             )
         ).subscribe()

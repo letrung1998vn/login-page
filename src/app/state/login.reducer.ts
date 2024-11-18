@@ -16,6 +16,6 @@ export interface LoginState {
   export const loginReducer = createReducer(
     initialState,
     on(login, (state,{userName, password}) => ({ ...state, userName:userName, password:password})),
-    on(loginSuccess, (state,{body }) =>  ({ ...state, body:state.response })),
-    on(loginFail, (state,{body }) => ({ ...state, body: state.response})),
+    on(loginSuccess, (state,{body }) =>  ({ ...state, body:body })),
+    on(loginFail, (state,{body }) => ({ ...state, body: body})),
   );
